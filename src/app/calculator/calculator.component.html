@@ -1,0 +1,17 @@
+<p class="title">
+  IS51 Group Calculator
+</p>
+
+<div class="build">
+  <div>
+    <input class="screen" type="text" value="{{ answer }}" [(ngModel)]="answer" >
+  </div>
+  <div type="grid" class="keys">
+    <button *ngFor="let clear of clearArray" type="button" class="btn btn-outline-secondary" (click)="clearNumbers(num)">{{clear}}</button>
+    <button *ngFor="let operator of operators" type="button" class="btn btn-outline-primary"  >{{ operator }}</button>
+    <button *ngFor="let num of numberArray" type="button" class="btn btn-outline-primary" (click)="showNumbers(num)">
+      {{ num }}
+    </button>
+    <button *ngFor="let equal of equals" type="button" class="btn btn-outline-primary" (click)="solve(result)">{{ equal }}</button>
+  </div>
+</div>
