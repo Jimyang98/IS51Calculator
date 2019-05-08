@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NumberSymbol } from '@angular/common';
 // import { isNumber } from 'util';
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculatorComponent implements OnInit {
 
-  answer = ('0');
+  answer: any = ('0');
   numberArray: String[] = [
     '7', '8', '9',
     '4', '5', '6',
@@ -16,10 +17,10 @@ export class CalculatorComponent implements OnInit {
     '0', '.'];
   clearArray: string[] = ['CE'];
   equals: string[] = ['='];
-  operators: string[] = ['+', '-', '*', '/'];
 
-  private previous: string[] = [''];
-  private current: string[] = [''];
+  operator = null;
+  previous = null;
+  operatorClicked = false;
 
   constructor() { }
 
@@ -27,20 +28,50 @@ export class CalculatorComponent implements OnInit {
   ngOnInit() {
     this.numberArray = [
       '6', '7', '8', '9',
-     '2', '3', '4', '5',
+      '2', '3', '4', '5',
       '1', '0', '.'];
     this.answer = ('');
     this.equals = ['='];
-    this.operators = ['+', '-', '*', '/'];
   }
 
   showNumbers(num: string) {
     console.log('', num);
-    if (this.answer === '') {
-      this.answer = '' + num;
-    } else {
-      this.answer = this.answer + num;
+    if (this.operatorClicked) {
+      this.answer = '';
+      this.operatorClicked = false;
     }
+    this.answer = this.answer + num;
+
+  }
+
+
+  setPrevious() {
+    this.operatorClicked = true;
+    this.previous = this.answer;
+  }
+
+  add() {
+    this.operator = (a, b) => a + b;
+    this.setPrevious();
+
+  }
+
+  subtract() {
+    this.operator = (a, b) => b - a;
+    this.setPrevious();
+
+  }
+
+  divide() {
+    this.operator = (a, b) => b / a;
+    this.setPrevious();
+
+  }
+
+  multiply() {
+    this.operator = (a, b) => a * b;
+    this.setPrevious();
+
   }
 
   clearNumbers(num: string) {
@@ -52,7 +83,11 @@ export class CalculatorComponent implements OnInit {
 
   solve(result: string) {
     console.log('', result);
+    this.answer = this.operator(
+      parseFloat(this.answer),
+      parseFloat(this.previous));
   }
+
 
 
 }
