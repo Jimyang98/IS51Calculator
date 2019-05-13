@@ -1,20 +1,59 @@
-<p class="title">
-  IS51 Group Calculator
-</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">IS51Calculator</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Calculator <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="buttonGrid" type="grid">
+  <button type="button" class="btn btn-success" (click)="saveAnswer()">Save</button>
+  <button type="button" class="btn btn-primary" (click)="random()">Random</button>
+</div>
+
 
 <div class="build">
-  <div class="screen">
-    <input class="screen" type="text" value="{{ answer }}" placeholder="0" readonly [(ngModel)]="answer" >
-  </div>
+
   <div type="grid" class="keys">
+    <input class="screen" type="text" value="{{ answer }}" placeholder="0" readonly [(ngModel)]="answer">
     <button *ngFor="let clear of clearArray" type="button" class="btn btn-outline-secondary" (click)="clearNumbers(num)">{{clear}}</button>
-    <button type="button" class="btn btn-outline-primary" (click)="add()"  >+</button>
-    <button type="button" class="btn btn-outline-primary" (click)="subtract()" >-</button>
-    <button type="button" class="btn btn-outline-primary" (click)="divide()" >/</button>
-    <button type="button" class="btn btn-outline-primary" (click)="multiply()" >x</button>
+    <button type="button" class="btn btn-outline-primary" (click)="add()">+</button>
+    <button type="button" class="btn btn-outline-primary" (click)="subtract()">-</button>
+    <button type="button" class="btn btn-outline-primary" (click)="divide()">/</button>
+    <button type="button" class="btn btn-outline-primary" (click)="multiply()">x</button>
     <button *ngFor="let num of numberArray" type="button" class="btn btn-outline-primary" (click)="showNumbers(num)">
       {{ num }}
     </button>
-    <button *ngFor="let equal of equals" type="button" class="btn btn-outline-primary" (click)="solve(result)">{{ equal }}</button>
+    <button *ngFor="let equal of equals" type="button" class="btn btn-outline-primary" (click)="solve(result)">{{ equal
+      }}</button>
   </div>
+</div>
+
+<div>
+  <table Class="table" type="grid">
+    <thead>
+      <tr>
+        <th scope="col">Saved Answers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let history of historyArray">
+        <td *ngIf="history.edit === false" scope="row">{{history.id}}</td>
+        <td *ngIf="history.edit" scope="row">
+          <input [(ngModel)]="history.id">
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -17,6 +17,7 @@ export class CalculatorComponent implements OnInit {
     '0', '.'];
   clearArray: string[] = ['CE'];
   equals: string[] = ['='];
+  historyArray: Array<any> = [];
 
   operator = null;
   previous = null;
@@ -32,6 +33,12 @@ export class CalculatorComponent implements OnInit {
       '1', '0', '.'];
     this.answer = ('');
     this.equals = ['='];
+    this.historyArray = [
+      {
+        id: this.answer = '',
+        edit: false
+      }
+    ];
   }
 
   showNumbers(num: string) {
@@ -57,13 +64,13 @@ export class CalculatorComponent implements OnInit {
   }
 
   subtract() {
-    this.operator = (a, b) => b - a;
+    this.operator = (a, b) => a - b;
     this.setPrevious();
 
   }
 
   divide() {
-    this.operator = (a, b) => b / a;
+    this.operator = (a, b) => a / b;
     this.setPrevious();
 
   }
@@ -84,10 +91,19 @@ export class CalculatorComponent implements OnInit {
   solve(result: string) {
     console.log('', result);
     this.answer = this.operator(
-      parseFloat(this.answer),
-      parseFloat(this.previous));
+      parseFloat(this.previous),
+      parseFloat(this.answer));
   }
 
+  random() {
+    this.answer = Math.floor(Math.random() * 13);
+  }
 
-
+  saveAnswer() {
+    this.historyArray.unshift({
+      id: this.answer,
+      edit: false
+    });
+    this.historyArray[''] = false;
+  }
 }
