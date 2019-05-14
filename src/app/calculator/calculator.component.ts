@@ -84,7 +84,7 @@ export class CalculatorComponent implements OnInit {
   clearNumbers(num: string) {
     console.log('', num);
     if (num = 'CE') {
-      this.answer = '';
+      this.answer = [];
     }
   }
 
@@ -105,5 +105,10 @@ export class CalculatorComponent implements OnInit {
       edit: false
     });
     this.historyArray[''] = false;
+  }
+
+  deleteAnswer(index: number) {
+    console.log('index', index);
+    this.historyArray.splice(index, 1);
   }
 }

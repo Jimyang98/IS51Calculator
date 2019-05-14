@@ -8,7 +8,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CalculatorComponent
+    CalculatorComponent,
   ],
   imports: [
     BrowserModule,
